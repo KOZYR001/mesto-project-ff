@@ -1,0 +1,25 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+  "build": "webpack --mode production",
+  "dev": "webpack serve"
+  },
+  "author": "Stas Basov",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.26.7",
+    "@babel/preset-env": "^7.26.7",
+    "babel-loader": "^9.2.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "core-js": "^3.40.0"
+  }
+}
