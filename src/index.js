@@ -1,13 +1,22 @@
+
+
+import './pages/index.css';
+import { initialCards } from './scripts/cards.js';
+import './scripts/cards.js';
+import {openModal, closeModal, addListener} from './components/modal.js';
+
+
+const popupEditProfile = document.querySelector("popup_type_edit");
+const popupAddCard = document.querySelector("popup_type_new-card");
+const popupImage = document.querySelector("popup_type_image");
 const numbers = [2, 3, 5];
-
-
 const doubledNumbers = numbers.map(number => number * 2);
-
-// @todo: Template
 const templateCard = document.querySelector('#card-template').content;
-
-// @todo: DOM узел
 const placesList = document.querySelector('.places__list');
+
+addListener(popupEditProfile);
+addListener(popupAddCard);
+addListener(popupImage);
 
 // @todo: Create Card
 function cardCreate (card, deleteButton) {
@@ -16,7 +25,7 @@ function cardCreate (card, deleteButton) {
   cardElement.querySelector('.card__image').alt = card.alt;
   cardElement.querySelector('.card__title').textContent = card.name;
   const buttonRemove = cardElement.querySelector('.card__delete-button');
-  buttonRemove.addEventListener('click',() => deleteCard(cardElement));
+  buttonRemove.addEventListener('click',() => deleteButton(cardElement));
   return cardElement;
 }
 
@@ -26,10 +35,10 @@ function cardCreate (card, deleteButton) {
  }
 
 // @todo: вывод карточки на страницу
-initialCards.forEach(function(element) {
-placesList.append(cardCreate(element));
+initialCards.forEach(function(deleteCard) {
+placesList.append(cardCreate(deleteCard));
 })
 
 console.log(doubledNumbers); 
 
-import './pages/index.css';
+
