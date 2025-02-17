@@ -2,9 +2,9 @@
 
 import './pages/index.css';
 import { initialCards } from './scripts/cards.js';
-import './components/cards.js';
+import './components/card.js';
 import {openModal, closeModal} from './components/modal.js';
-import {cardCreate, handleDeleteItem, cardLike} from "./components/cards.js";
+import {cardCreate, handleDeleteItem, cardLike} from "./components/card.js";
 
 const placesList = document.querySelector('.places__list');
 
