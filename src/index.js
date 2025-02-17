@@ -2,51 +2,100 @@
 
 import './pages/index.css';
 import { initialCards } from './scripts/cards.js';
-import './scripts/cards.js';
-import {openModal, closeModal, addListener} from './components/modal.js';
+import './components/cards.js';
+import {openModal, closeModal} from './components/modal.js';
+import {cardCreate, handleDeleteItem, cardLike} from "./components/cards.js";
+
+const placesList = document.querySelector('.places__list');
 
 const addCardBtn = document.querySelector(".profile__add-button")
 const profileEditButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit");
+const buttonClosePopup = document.querySelectorAll('.popup__close');
 const popupAddCard = document.querySelector(".popup_type_new-card");
-const popupImage = document.querySelector(".popup__image");
-const numbers = [2, 3, 5];
-const doubledNumbers = numbers.map(number => number * 2);
-const templateCard = document.querySelector('#card-template').content;
-const placesList = document.querySelector('.places__list');
+
+const elementForm = document.querySelector('.popup__form');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_description');
+
+const newPlaceForm = document.querySelector('.popup__form[name="new-place"]');
+const placeInputName = newPlaceForm.querySelector('.popup__input_type_card-name');
+const placeInputLink = newPlaceForm.querySelector('.popup__input_type_url');
+
+const nameProfile = document.querySelector('.profile__title');
+const descriptionProfile = document.querySelector('.profile__description');
+
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
+const imagePopup = document.querySelector('.popup_type_image');
+const popups = document.querySelectorAll('.popup');
 
 
-addListener(popupEditProfile);
-addListener(popupAddCard);
-addListener(popupImage);
 
-// @todo: Create Card
-function cardCreate (card, handleDelete) {
-  const cardElement = templateCard.querySelector('.card').cloneNode(true);
-  cardElement.querySelector('.card__image').src = card.link;
-  cardElement.querySelector('.card__image').alt = card.alt;
-  cardElement.querySelector('.card__title').textContent = card.name;
-  const buttonRemove = cardElement.querySelector('.card__delete-button');
-  buttonRemove.addEventListener('click',() => handleDelete(cardElement));
-  return cardElement;
+
+initialCards.forEach((element) => {
+  const card = cardCreate(element, handleDeleteItem, cardLike, openImage);
+  placesList.append(card);
+});
+
+profileEditButton.addEventListener('click', () => {
+  inputName.value = nameProfile.textContent;
+  inputJob.value = descriptionProfile.textContent;
+  openModal(popupEditProfile);
+});
+
+buttonClosePopup.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    const popup = e.target.closest('.popup');
+    closeModal(popup);
+  });
+});
+
+newPlaceForm.addEventListener('submit', (event) => {
+ event.preventDefault();
+
+ const link = placeInputLink.value;
+ const name = placeInputName.value;
+
+ if (name && link) {
+  const cardNew = cardCreate({name, link}, handleDeleteItem, openImage, cardLike);
+  placesList.prepend(cardNew);
+
+  closeModal(popupAddCard);
+  newPlaceForm.reset();
+ }
+});
+
+function openImage(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
+
+  openModal(imagePopup);
 }
 
-// @todo: Delete card
- function handleDeleteItem(cardElement) {
-     cardElement.remove();
- }
+function handleFormSubmit(evt) {
+  evt.preventDefault();
+  const valueJob = inputJob.value;
+  const valueName = inputName.value;
+  descriptionProfile.textContent = valueJob;
+  nameProfile.textContent = valueName;
+  closeModal(popupEditProfile);
+}
 
-// @todo: вывод карточки на страницу
-initialCards.forEach(function(card) {
-placesList.append(cardCreate(card,handleDeleteItem));
-})
-
-console.log(doubledNumbers);
-
-profileEditButton.addEventListener("click", () => openModal(popupEditProfile));
-addCardBtn.addEventListener("click", () => openModal(popupAddCard));
-
-popupImage.addEventListener("click", () => {
-  openModal(popupImage);
+popups.forEach((popup) =>{
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      closeModal(popup);
+    }
+  });
 });
+ 
+
+addCardBtn.addEventListener('click', () =>  {
+  openModal(popupAddCard);
+});
+
+elementForm.addEventListener('submit', handleFormSubmit);
+
 
