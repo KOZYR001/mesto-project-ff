@@ -1,5 +1,4 @@
 
-
 export function openModal(modal) {
     modal.classList.add('popup_is-animated');
     setTimeout(() => {
@@ -16,10 +15,15 @@ export function closeModal(popup) {
     document.removeEventListener('keydown', handleEscKeyUp);
 }
 
-
 export const handleEscKeyUp = (e) => {
     if (e.key === "Escape") {
         const popup = document.querySelector(".popup_is-opened");
             closeModal(popup);
   }
+};
+
+export function closeByOverlayClick(popup, e) {
+    if (e.target === popup) {
+        closeModal(popup);
+    }
 };

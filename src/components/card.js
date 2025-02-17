@@ -1,7 +1,4 @@
 
-
-import { openModal } from "./modal.js";
-
 const templateCard = document.querySelector('#card-template').content;
 
 export function cardCreate (card, handleDelete, cardLike, openImage) {
@@ -33,7 +30,6 @@ export function cardCreate (card, handleDelete, cardLike, openImage) {
 export function handleDeleteItem(cardElement) {
   cardElement.remove();
 }
-
 
 export function cardLike(buttonLike) {
   buttonLike.classList.add('card__like-button_is-active');
