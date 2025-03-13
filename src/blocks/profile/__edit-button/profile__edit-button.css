@@ -7,10 +7,6 @@
   grid-area: button;
   align-self: center;
   cursor: pointer;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
   transition: 0.3s;
   padding: 0;
   margin: 0;
@@ -28,16 +24,3 @@
   }
 }
 
-.error-message {
-  color: red;
-  font-size: 12px;
-  display:none;
-}
-
-input.error, textarea.error {
-  border-color: red;
-}
-
-button:disabled {
-  background-color: #ccc;
-}

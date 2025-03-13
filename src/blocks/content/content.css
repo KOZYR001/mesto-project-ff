@@ -2,3 +2,31 @@
   flex-shrink: 0;
   flex-grow: 1;
 }
+
+@media screen and (max-width: 568px) {
+  .popup__content {
+    width: 100%;
+    max-width: calc(100% - 80px);
+    margin-top: 40px;
+    padding: 30px 20px;
+  }
+}
+
+.popup__content_confirm {
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  max-width: 430px;
+  padding: 34px 36px;
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (max-width: 568px) {
+  .popup__content_confirm {
+    width: 100%;
+    max-width: calc(100% - 80px);
+    margin-top: 40px;
+    padding: 30px 20px;
+  }
+}
